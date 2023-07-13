@@ -79,8 +79,13 @@ pipeline {
                 // Send success/failure notification
                 
                 // Example commands:
-                 sh 'echo "The Deploymentis done successful!" | mail -s "Deployment Notification" manishsaini1174@gmail.com'
+                 sh 'echo "The Deploymentis done successful!"'
             }
+        }
+    }
+    post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 }

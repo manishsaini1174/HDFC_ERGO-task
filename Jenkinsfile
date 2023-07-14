@@ -60,7 +60,7 @@ pipeline {
                 //withEnv(["$GCLOUD_PATH=/home/google-cloud-sdk/bin/gcloud"]) {
                     sh "/home/google-cloud-sdk/bin/gcloud version"
                     sh "/home/google-cloud-sdk/bin/gcloud container clusters get-credentials hdfcergo --zone us-central1-f --project cellular-sylph-392206"
-                    sh "/home/google-cloud-sdk/bin/kubectl create deployment --image=gcr.io/${PROJECT_ID}/${DOCKER_IMAGE}"
+                    sh "/home/google-cloud-sdk/bin/kubectl create deployment hdfcergo--image=gcr.io/${PROJECT_ID}/${DOCKER_IMAGE}"
             }
         }
         
@@ -69,8 +69,8 @@ pipeline {
                 // Configure autoscaling based on CPU usage
                 
                 // Example commands:
-                 sh 'kubectl apply -f hpa-scaledown.yaml'
-                 sh 'kubectl apply -f hpa-scaleup.yaml'
+                 sh '/home/google-cloud-sdk/bin/kubectl apply -f hpa-scaledown.yaml'
+                 sh '/home/google-cloud-sdk/bin/kubectl apply -f hpa-scaleup.yaml'
             }
         }
         

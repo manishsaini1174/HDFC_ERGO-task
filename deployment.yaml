@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hdfcergo 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: hdfcergo 
+          image: gcr.io/cellular-sylph-392206/hdfcergo:latest
+          env:
+            - name: SERVICE_ACCOUNT_JSON_SECRET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: gcrsecret
+                  key: service-account-json
